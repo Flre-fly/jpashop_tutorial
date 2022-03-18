@@ -2,8 +2,11 @@ package jpabook.jpashop.domain;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
+@Table(name = "ORDERS")
 @TableGenerator(
         name = "ORDER_SEQ_GENERATOR",
         table = "MY_SEQUENCES",
@@ -12,11 +15,50 @@ import java.time.LocalDateTime;
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ORDER_SEQ_GENERATOR")
+    @Column(name = "order_id")
     private Long id;
 
-    @ManyToOne//이부분 맞나?
+    @ManyToOne
+    @JoinColumn(name = "member_id")
     private Member member;
 
+    @OneToMany(mappedBy = "ORDER_ITEM")
+    @JoinColumn(name = "order_item_id")
+    private List<OrderItem> OrderItems = new ArrayList<>();
+
     private LocalDateTime orderDate;
+    @Enumerated(EnumType.STRING)
     private OrderStatus status;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Member getMember() {
+        return member;
+    }
+
+    public void setMember(Member member) {
+        this.member = member;
+    }
+
+    public LocalDateTime getOrderDate() {
+        return orderDate;
+    }
+
+    public void setOrderDate(LocalDateTime orderDate) {
+        this.orderDate = orderDate;
+    }
+
+    public OrderStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(OrderStatus status) {
+        this.status = status;
+    }
 }
