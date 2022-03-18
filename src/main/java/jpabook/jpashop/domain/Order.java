@@ -18,17 +18,27 @@ public class Order {
     @Column(name = "order_id")
     private Long id;
 
+    @OneToOne
+    @JoinColumn(name = "delivery_id")
+    private Delivery delivery;
+
     @ManyToOne
     @JoinColumn(name = "member_id")
     private Member member;
 
     @OneToMany(mappedBy = "ORDER_ITEM")
     @JoinColumn(name = "order_item_id")
-    private List<OrderItem> OrderItems = new ArrayList<>();
+    private List<OrderItem> orderItems = new ArrayList<>();
 
     private LocalDateTime orderDate;
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
+
+    //연관관계 편의 메서드
+    public void addOrderItem(OrderItem orderItem){
+        orderItems.add(orderItem);
+        orderItem.setOrder(this);
+    }
 
     public Long getId() {
         return id;

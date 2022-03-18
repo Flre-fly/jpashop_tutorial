@@ -2,6 +2,8 @@ package jpabook.jpashop.domain;
 
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @TableGenerator(
@@ -14,6 +16,9 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ITEM_SEQ_GENERATOR")
     @Column(name = "item_id")
     private Long id;
+
+    @OneToMany(mappedBy = "item")
+    private List<CategoryItem> categoryItems = new ArrayList<>();
 
     private String name;
     private int price;

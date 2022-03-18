@@ -20,6 +20,11 @@ public class Member {
     @JoinColumn(name = "order_id")
     private List<Order> orders = new ArrayList<>();
 
+    @OneToOne
+    @JoinColumn(name = "delivery_id")
+    private Delivery delivery;
+
+
     private String name;
     private String city;
     private String street;
