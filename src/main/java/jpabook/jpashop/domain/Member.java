@@ -17,7 +17,6 @@ public class Member {
     private Long id;
 
     @OneToMany(mappedBy = "member")//연관관계의 주인은 fk가 있는 orders의 member
-    @JoinColumn(name = "order_id")
     private List<Order> orders = new ArrayList<>();
 
     @OneToOne
