@@ -12,7 +12,7 @@ import java.util.List;
         table = "MY_SEQUENCES",
         pkColumnValue = "ORDER_SEQ", allocationSize = 1
 )
-public class Order {
+public class Order extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ORDER_SEQ_GENERATOR")
     @Column(name = "order_id")

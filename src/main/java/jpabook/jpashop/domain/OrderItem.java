@@ -8,7 +8,7 @@ import javax.persistence.*;
         table = "MY_SEQUENCES",
         pkColumnValue = "ORDER_ITEM_SEQ", allocationSize = 1
 )
-public class OrderItem {
+public class OrderItem extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ORDER_ITEM_SEQ_GENERATOR")
     @Column(name = "order_item_id")

@@ -6,12 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @TableGenerator(
         name = "ITEM_SEQ_GENERATOR",
         table = "MY_SEQUENCES",
         pkColumnValue = "ITEM_SEQ", allocationSize = 1
 )
-public class Item {
+public abstract class Item extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ITEM_SEQ_GENERATOR")
     @Column(name = "item_id")
